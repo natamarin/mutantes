@@ -1,0 +1,14 @@
+{
+    "telemetry.machineId": "a2bf5f565f964434ea9d6f2cc12357ff4a1870064ad11511cfff6de51c6b545c",
+    "openedPathsList": {
+        "workspaces3": [
+            {
+                "id": "92d67a99df755768cc7d3cdf2fb6bbf2",
+                "configURIPath": "file:///c%3A/mutantes/.metadata/codemix.code-workspace"
+            }
+        ],
+        "files2": []
+    },
+    "theme": "vs-dark",
+    "themeBackground": "#1e1e1e"
+}
