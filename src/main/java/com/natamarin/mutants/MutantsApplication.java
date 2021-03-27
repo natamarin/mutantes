@@ -6,9 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MutantsApplication {
 
-	public static String main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(MutantsApplication.class, args);
-		return "Hello World!";
 	}
-
 }
