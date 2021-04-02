@@ -58,9 +58,10 @@ Servicio GET que retorna un Json con el siguiente formato
 ## Instrucciones de ejecución
 
 Se puede acceder con las URL de cada servicio mediante SoapUI, teniendo en cuenta el tipo de solicitud y formato Json descritos anteriormente.
-
-http://mutants123.herokuapp.com/mutant
+```
+http://mutants123.herokuapp.com/mutant|linebreaksbr
 http://mutants123.herokuapp.com/stats
+```
 
 Si se requiere ver la Base de datos, en un cliente de PostgreSQL poner los siguientes datos de conexión:
 **Host:** ec2-54-205-183-19.compute-1.amazonaws.com
