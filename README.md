@@ -31,3 +31,45 @@ Al procesar la matriz, va a encontrar la primera secuencia TTTT en forma vertica
 * Spring boot
 * Maven
 * PostgreSQL
+
+### Servicios Rest
+
+*	/mutant
+Servicio POST que recibe un Json con el siguiente formato
+
+{
+ "adn": ["TGCTA", "TCGAT", "TTAGA", "TAAAA"]
+}
+
+*	/stats
+Servicio GET que retorna un Json con el siguiente formato
+{
+    "count_mutant_dna":40, 
+    "count_human_dna":100,
+    "ratio":0.4
+}
+
+### Códigos de respuesta
+
+* 200 - Ok
+* 403 - Forbidden
+*	400 - Bad request
+
+## Instrucciones de ejecución
+
+Se puede acceder con las URL de cada servicio mediante SoapUI, teniendo en cuenta el tipo de solicitud y formato Json descritos anteriormente.
+
+http://mutants123.herokuapp.com/mutant
+http://mutants123.herokuapp.com/stats
+
+Si se requiere ver la Base de datos, en un cliente de PostgreSQL poner los siguientes datos de conexión:
+**Host:** ec2-54-205-183-19.compute-1.amazonaws.com
+**Database:** d98eokp3ms4fn0
+**User:** nwiimfqxlzybjo
+**Pass:** c35ad2177c07b8d854db8ca71a9c999b42d5ee72f1d2a2ec4fa99ac77864cdf4
+**Port:** 5432
+
+
+
+
+
