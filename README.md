@@ -1,10 +1,10 @@
-Prueba técnica Mercadolibre
+# Prueba técnica Mercadolibre
 
 Identificar si un ADN (array de caracteres) pertenece o no a un mutante. Se sabe que es mutante si se encuentra más de una secuencia de cuatro caracteres A, T, C, G.
 
-Solución
+## Solución
 
-Validaciones iniciales:
+## Validaciones iniciales:
 •	Se valida que el tamaño mínimo del array sea {1,8}, {8,1}, {2,4} o {4,2}
 •	Se valida que cada cadena tenga la misma cantidad de caracteres
 •	Se valida que los caracteres correspondan a las letras A, T, C, G
@@ -16,3 +16,9 @@ Cada método de dirección posee la misma lógica y se va moviendo entre las cas
 
 Si un método de dirección encuentra las 4 coincidencias, las retorna y las almacena en una cadena de String. Cuando la cadena cuente con 8 caracteres, finaliza los ciclos y retorna true pues esto significa que ya encontró un ADN de mutante.
 
+## Ejemplo:
+![image](https://user-images.githubusercontent.com/81449113/113435216-fc7ffd80-93a7-11eb-8a6f-a7d3fb16778e.png)
+
+En esta matriz se puede observar que existen tres secuencias de 4 caracteres en diferentes direcciones: vertical, diagonal izquierdo y horizontal.
+
+Al procesar la matriz, va a encontrar la primera secuencia TTTT en forma vertical, seguido a esto, encontrará la segunda secuencia AAAA en forma diagonal izquierdo. Como ya encontró las dos secuencias de 4 caracteres (es decir ya tiene una cadena de 8 caracteres) termina los ciclos y finaliza el procesamiento.
