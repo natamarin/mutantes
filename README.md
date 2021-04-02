@@ -1,5 +1,7 @@
 # Prueba técnica Mercadolibre
 
+![image](https://user-images.githubusercontent.com/81449113/113436385-3f42d500-93aa-11eb-879d-645dd4d6e10a.png)
+
 Identificar si un ADN (array de caracteres) pertenece o no a un mutante. Se sabe que es mutante si se encuentra más de una secuencia de cuatro caracteres A, T, C, G.
 
 ## Solución
@@ -24,3 +26,8 @@ En esta matriz se puede observar que existen tres secuencias de 4 caracteres en 
 Al procesar la matriz, va a encontrar la primera secuencia TTTT en forma vertical, seguido a esto, encontrará la segunda secuencia AAAA en forma diagonal izquierdo. Como ya encontró las dos secuencias de 4 caracteres (es decir ya tiene una cadena de 8 caracteres) termina los ciclos y finaliza el procesamiento.
 
 ## Tecnologías utilizadas
+* Heroku
+* Java 1.8
+* Spring boot
+* Maven
+* PostgreSQL
