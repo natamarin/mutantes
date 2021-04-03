@@ -7,27 +7,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.natamarin.mutants.controller.MutantController;
-import com.natamarin.mutants.dto.ConsultaMutantesInDTO;
-import com.natamarin.mutants.services.MutantService;
+import com.natamarin.mutants.services.StatsService;
 
 
 @WebMvcTest(MutantController.class)
-public class MutantControllerTest {
+public class StatsControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@MockBean	
-	private MutantService mutantService;
+	private StatsService statsService;
 	
 	@Test
-	public void mutantControllerTest1() {
+	public void statsControllerTest1() {
 		
-		String[] adn = {"AAAA", "CCCC"};
+		statsService.stats();
 		
-		ConsultaMutantesInDTO consultaMutantesInDTO = new ConsultaMutantesInDTO();
-		consultaMutantesInDTO.setAdn(adn);
-		mutantService.mutant(consultaMutantesInDTO);
 		
 	}
+		
+
 }
