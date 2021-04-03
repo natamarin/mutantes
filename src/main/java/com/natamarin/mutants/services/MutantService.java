@@ -75,19 +75,16 @@ public class MutantService {
 				
 		// Se buscan las coincidencias en todas las direcciones
 		Boolean isMutant = encontrarCoincidencias(n, m, matriz);
+		
+		// Se guarda el ADN encontrado
+		guardarAdn(isMutant, adnString.toString());
 				
 		// Si el ADN no es mutante
-		if (!isMutant) {
-			// Se guarda el ADN encontrado
-			guardarAdn(isMutant, adnString.toString());
-			
+		if (!isMutant) {			
 			// retorna forbidden Codigo 403
 			consultaMutantesOutDTO.setEstado("403");
 			return consultaMutantesOutDTO;
 		}
-		
-		// Se guarda el ADN encontrado
-		guardarAdn(isMutant, adnString.toString());
 		
 		// retorna exitoso Codigo 200
 		consultaMutantesOutDTO.setEstado("200");

@@ -13,7 +13,9 @@ public class ConsultaEstadisticasOutDTO implements Serializable {
 	
 	private Long count_mutant_dna;
 	
-	private Long ratio;	
+	private Long ratio;
+	
+	private String estado;
 
 	
 	public Long getCount_human_dna() {
@@ -39,5 +41,14 @@ public class ConsultaEstadisticasOutDTO implements Serializable {
 	public void setRatio(Long ratio) {
 		this.ratio = ratio;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
 	
 }

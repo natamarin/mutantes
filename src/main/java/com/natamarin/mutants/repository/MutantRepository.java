@@ -10,6 +10,6 @@ import com.natamarin.mutants.entity.AdnVerificado;
  *
  */
 public interface MutantRepository extends CrudRepository<AdnVerificado, Long> {
-	
 
+	Long countByEsMutante(Boolean esMutante);
 }
