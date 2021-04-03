@@ -13,10 +13,7 @@ public class ConsultaEstadisticasOutDTO implements Serializable {
 	
 	private Long count_mutant_dna;
 	
-	private Long ratio;
-	
-	pri
-		
+	private Long ratio;	
 
 	
 	public Long getCount_human_dna() {

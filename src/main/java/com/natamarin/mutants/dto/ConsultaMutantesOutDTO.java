@@ -12,7 +12,7 @@ public class ConsultaMutantesOutDTO implements Serializable {
 	/**
 	 * Atributo que determina el codigo de status del servicio  
 	 */
-	private String respuesta;
+	private String estado;
 
 	
 	/**
