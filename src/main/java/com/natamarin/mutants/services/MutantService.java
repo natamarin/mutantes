@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -23,7 +21,7 @@ public class MutantService {
 	private static final ArrayList<Character> ADN_LETRAS = new ArrayList<>(Arrays.asList('A', 'T', 'C', 'G'));
 		
 	@PostMapping("/mutant")
-	public ResponseEntity mutant(ConsultaMutantesInDTO consultaMutantesInDTO) {
+	public ConsultaMutantesOutDTO mutant(ConsultaMutantesInDTO consultaMutantesInDTO) {
 		
 		ConsultaMutantesOutDTO consultaMutantesOutDTO = new ConsultaMutantesOutDTO();
 		
@@ -32,6 +30,8 @@ public class MutantService {
 		
 		// Se obtiene el array de la entrada
 		String[] adn = consultaMutantesInDTO.getAdn();
+		
+		StringBuilder adnString = new StringBuilder();
 		
 		// Se crea una matriz a partir del array
 		// la cantidad de filas es el tamaño del array
@@ -49,7 +49,8 @@ public class MutantService {
 		// Se valida que el tamaño de la matriz sea correcto
 		if (!validarTamanioMatriz(n, m)) {
 			// retorna bad request Codigo 400
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			consultaMutantesOutDTO.setEstado("400");
+			return consultaMutantesOutDTO;
 		}
 				
 		// Se reccore el array de adn
@@ -57,12 +58,14 @@ public class MutantService {
 			
 			// Cada cadena se convierte en lista de caracteres
 			char[] caracteresFila = adn[i].toCharArray();
+			adnString.append(caracteresFila);
 							
 			for (int j = 0; j < m; j++) {
 				// Se hacen las validaciones sobre la matriz y el caracter procesado
 				if (!validarMatriz(primerElemento.length(), caracteresFila.length, caracteresFila[j])) {
 					// retorna bad request Codigo 400
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+					consultaMutantesOutDTO.setEstado("400");
+					return consultaMutantesOutDTO;
 				}
 				
 				// Se arma la matriz con los ADN que llegan en el array
@@ -72,21 +75,23 @@ public class MutantService {
 				
 		// Se buscan las coincidencias en todas las direcciones
 		Boolean isMutant = encontrarCoincidencias(n, m, matriz);
-		
+				
 		// Si el ADN no es mutante
 		if (!isMutant) {
 			// Se guarda el ADN encontrado
-			guardarAdn(isMutant, adn.toString());
+			guardarAdn(isMutant, adnString.toString());
 			
 			// retorna forbidden Codigo 403
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+			consultaMutantesOutDTO.setEstado("403");
+			return consultaMutantesOutDTO;
 		}
 		
 		// Se guarda el ADN encontrado
-		guardarAdn(isMutant, adn.toString());
+		guardarAdn(isMutant, adnString.toString());
 		
 		// retorna exitoso Codigo 200
-		return ResponseEntity.ok(null);
+		consultaMutantesOutDTO.setEstado("200");
+		return consultaMutantesOutDTO;
 	}
 	
 	/**
