@@ -20,7 +20,7 @@ public class StatsService {
 				
 		// Se consultan los ADN verificados
 		Long contAdnHumanos = mutantRepository.countByEsMutante(Boolean.FALSE);
-		Long contAdnMutantes = mutantRepository.countByEsMutante(Boolean.FALSE);
+		Long contAdnMutantes = mutantRepository.countByEsMutante(Boolean.TRUE);
 		
 		System.out.println("mutantes: " + contAdnMutantes);
 		System.out.println("humanos: " + contAdnHumanos);
