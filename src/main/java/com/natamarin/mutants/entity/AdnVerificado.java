@@ -15,6 +15,8 @@ public class AdnVerificado {
 
 	@Column(length=1000)
 	private String adn;
+	
+	private Boolean esMutante;
 
 	public Long getId() {
 		return id;
@@ -30,6 +32,14 @@ public class AdnVerificado {
 
 	public void setAdn(String adn) {
 		this.adn = adn;
+	}
+
+	public Boolean getEsMutante() {
+		return esMutante;
+	}
+
+	public void setEsMutante(Boolean esMutante) {
+		this.esMutante = esMutante;
 	}
 	
 }

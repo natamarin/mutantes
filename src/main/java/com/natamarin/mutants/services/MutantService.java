@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,7 +23,7 @@ public class MutantService {
 	private static final ArrayList<Character> ADN_LETRAS = new ArrayList<>(Arrays.asList('A', 'T', 'C', 'G'));
 		
 	@PostMapping("/mutant")
-	public ConsultaMutantesOutDTO mutant(ConsultaMutantesInDTO consultaMutantesInDTO) {
+	public ResponseEntity mutant(ConsultaMutantesInDTO consultaMutantesInDTO) {
 		
 		ConsultaMutantesOutDTO consultaMutantesOutDTO = new ConsultaMutantesOutDTO();
 		
@@ -46,8 +48,8 @@ public class MutantService {
 				
 		// Se valida que el tamaño de la matriz sea correcto
 		if (!validarTamanioMatriz(n, m)) {
-			consultaMutantesOutDTO.setEstado("error");
-			return consultaMutantesOutDTO;
+			// retorna bad request Codigo 400
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 				
 		// Se reccore el array de adn
@@ -59,8 +61,8 @@ public class MutantService {
 			for (int j = 0; j < m; j++) {
 				// Se hacen las validaciones sobre la matriz y el caracter procesado
 				if (!validarMatriz(primerElemento.length(), caracteresFila.length, caracteresFila[j])) {
-					consultaMutantesOutDTO.setEstado("error");
-					return consultaMutantesOutDTO;
+					// retorna bad request Codigo 400
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 				}
 				
 				// Se arma la matriz con los ADN que llegan en el array
@@ -69,15 +71,22 @@ public class MutantService {
 		}
 				
 		// Se buscan las coincidencias en todas las direcciones
-		String adnEncontrado = encontrarCoincidencias(n, m, matriz);	
+		Boolean isMutant = encontrarCoincidencias(n, m, matriz);
+		
+		// Si el ADN no es mutante
+		if (!isMutant) {
+			// Se guarda el ADN encontrado
+			guardarAdn(isMutant, adn.toString());
+			
+			// retorna forbidden Codigo 403
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+		}
 		
 		// Se guarda el ADN encontrado
-		AdnVerificado adnVerificado = new AdnVerificado();
-		adnVerificado.setAdn(adnEncontrado);
-		mutantRepository.save(adnVerificado);
+		guardarAdn(isMutant, adn.toString());
 		
-		consultaMutantesOutDTO.setEstado("exitoso");
-		return consultaMutantesOutDTO;
+		// retorna exitoso Codigo 200
+		return ResponseEntity.ok(null);
 	}
 	
 	/**
@@ -86,10 +95,13 @@ public class MutantService {
 	 * @param n, filas
 	 * @param m, columnas
 	 * @param matriz, matriz con todas las letras
+	 * @return true si el ADN es mutante
+	 *         false si el ADN no es mutante
 	 * 
 	 */
-	private String encontrarCoincidencias (int n, int m, char matriz [][]) {
+	private Boolean encontrarCoincidencias (int n, int m, char matriz [][]) {
 		
+		Boolean isMutant = Boolean.FALSE;
 		StringBuilder adnFinal = new StringBuilder();
 		boolean finalizarCiclos = false;
 		
@@ -137,11 +149,13 @@ public class MutantService {
 				// que ya encontró dos cadenas de ADN de mutantes
 				if (adnFinal.length() == 8) {
 					finalizarCiclos = true;
+					isMutant = Boolean.TRUE;
 					break;	
 				}				
 			}
-		}		
-		return adnFinal.toString();
+		}			
+		
+		return isMutant;
 	}	
 	
 	/**
@@ -292,5 +306,23 @@ public class MutantService {
 				compararPosicionDiagIzquierda(matrizAux, i+1, j-1, n, m, letraComparar, adnDiagIzq);
 			}			
 		}	
+	}
+	
+	/**
+	 * Método encargado guarda en BD el ADN que se procesó
+	 * 
+	 * @param isMutant 
+	 * @param adn
+	 * 
+	 */	
+	private void guardarAdn(Boolean isMutant, String adn) {
+		
+		System.out.println("ADN guardar: " +adn);
+		
+		// Se guarda el ADN encontrado
+		AdnVerificado adnVerificado = new AdnVerificado();
+		adnVerificado.setAdn(adn.toString());
+		adnVerificado.setEsMutante(isMutant);
+		mutantRepository.save(adnVerificado);
 	}
 }
