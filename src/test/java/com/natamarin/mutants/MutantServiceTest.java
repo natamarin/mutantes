@@ -5,20 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.natamarin.mutants.dto.ConsultaMutantesInDTO;
 import com.natamarin.mutants.dto.ConsultaMutantesOutDTO;
-import com.natamarin.mutants.repository.MutantRepository;
 import com.natamarin.mutants.services.MutantService;
 
 
 @ExtendWith(MockitoExtension.class)
 public class MutantServiceTest {
-	
-	@Mock
-	MutantRepository mutantRepository;
 	
 	@InjectMocks
 	MutantService mutantService;

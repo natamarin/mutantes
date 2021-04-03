@@ -6,8 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.natamarin.mutants.dto.ConsultaEstadisticasOutDTO;
 import com.natamarin.mutants.entity.AdnVerificado;
@@ -17,16 +15,13 @@ import com.natamarin.mutants.services.StatsService;
 
 @ExtendWith(MockitoExtension.class)
 public class StatsServiceTest {
-	
+		
 	@Mock
 	MutantRepository mutantRepository;
 	
 	@InjectMocks
 	StatsService statsService;
-	
-	@Autowired
-	TestEntityManager entityManager;   
-		
+			
 	/**
 	 * Prueba unitaria donde se envía un ADN de mutante
 	 * de forma horizontal
@@ -36,12 +31,13 @@ public class StatsServiceTest {
 		
 	
 		AdnVerificado anAdnVerificado = new AdnVerificado();
-		anAdnVerificado.setId(1L);
+		anAdnVerificado.setId(100L);
 		anAdnVerificado.setAdn("hola");
 		anAdnVerificado.setEsMutante(Boolean.TRUE);
 				
 		mutantRepository.save(anAdnVerificado);
 				
+		System.out.println(mutantRepository.countByEsMutante(Boolean.TRUE));
 		
 				
 		ConsultaEstadisticasOutDTO consultaEstadisticasOutDTO = statsService.stats();
