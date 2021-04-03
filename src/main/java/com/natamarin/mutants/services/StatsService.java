@@ -19,12 +19,8 @@ public class StatsService {
 		ConsultaEstadisticasOutDTO consultaEstadisticasOutDTO = new ConsultaEstadisticasOutDTO();
 				
 		// Se consultan los ADN verificados
-		Long contAdnHumanos = mutantRepository.countByEsMutante(Boolean.FALSE);
-		Long contAdnMutantes = mutantRepository.countByEsMutante(Boolean.TRUE);
-		
-		System.out.println("mutantes: " + contAdnMutantes);
-		System.out.println("humanos: " + contAdnHumanos);
-
+		int contAdnHumanos = mutantRepository.countByEsMutante(Boolean.FALSE);
+		int contAdnMutantes = mutantRepository.countByEsMutante(Boolean.TRUE);		
 		Long ratio = 0L;
 				
 		consultaEstadisticasOutDTO.setEstado("200");
@@ -39,7 +35,7 @@ public class StatsService {
 		}
 		
 		// Se calcula el ratio
-		ratio = contAdnMutantes / contAdnHumanos;		
+		ratio = Long.valueOf(contAdnMutantes) / Long.valueOf(contAdnHumanos);		
 		consultaEstadisticasOutDTO.setRatio(ratio);		
 		return consultaEstadisticasOutDTO;
 	}

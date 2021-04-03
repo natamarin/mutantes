@@ -319,8 +319,6 @@ public class MutantService {
 	 */	
 	private void guardarAdn(Boolean isMutant, String adn) {
 		
-		System.out.println("ADN guardar: " +adn);
-		
 		// Se guarda el ADN encontrado
 		AdnVerificado adnVerificado = new AdnVerificado();
 		adnVerificado.setAdn(adn.toString());
