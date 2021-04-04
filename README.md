@@ -72,6 +72,9 @@ Pass: c35ad2177c07b8d854db8ca71a9c999b42d5ee72f1d2a2ec4fa99ac77864cdf4
 Port: 5432
 ```
 
+## Pruebas unitarias
+
+![image](https://user-images.githubusercontent.com/81449113/113495123-bd8b9e00-94b4-11eb-989e-d201f36bc3b0.png)
 
 
 
